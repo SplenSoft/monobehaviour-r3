@@ -1,0 +1,7 @@
+{
+  "name": "com.splensoft.monobehaviourr3",
+  "version": "1.0.0",
+  "displayName": "MonoBehaviour R3",
+  "description": "A Unity MonoBehaviour wrapper that leverages observable patterns from R3 for better event handling. Features hot-reload-safe initialization method.",
+  "unity": "2022.1"
+}
