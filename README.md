@@ -25,5 +25,5 @@ R3 uses the *.*.* release tag, so you can specify a version like #1.0.0. For exa
 3. Install this package by referencing the git URL
 
 ```
-
+ https://github.com/SplenSoft/monobehaviour-r3.git?path=/Packages/com.splensoft.monobehaviourr3
 ```
