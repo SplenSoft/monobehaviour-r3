@@ -22,7 +22,15 @@ https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity
 
 R3 uses the *.*.* release tag, so you can specify a version like #1.0.0. For example: `https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity#1.0.0`
 
-3. Install this package by referencing the git URL
+3. Install the `UniTask` package by referencing the git URL
+
+```
+https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.10
+```
+
+Again, you can change the release tag as needed.
+
+4. Install this package by referencing the git URL
 
 ```
  https://github.com/SplenSoft/monobehaviour-r3.git?path=/Packages/com.splensoft.monobehaviourr3
