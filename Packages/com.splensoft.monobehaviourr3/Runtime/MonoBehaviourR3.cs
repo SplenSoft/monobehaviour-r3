@@ -1,6 +1,7 @@
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using UnityEngine;
 
 namespace SplenSoft.Unity
 {
@@ -21,6 +22,9 @@ namespace SplenSoft.Unity
 
         public bool IsDestroyed { get; private set; }
 
+        protected CancellationTokenSource _cancellationDisable = new();
+        protected CancellationTokenSource _cancellationDestroy = new();
+
         protected virtual void Awake()
         {
             TryInitialize();
@@ -28,6 +32,8 @@ namespace SplenSoft.Unity
 
         protected virtual void OnEnable()
         {
+            _cancellationDisable?.Dispose();
+            _cancellationDisable = new CancellationTokenSource();
             TryInitialize();
         }
 
@@ -38,12 +44,15 @@ namespace SplenSoft.Unity
                 item.Dispose();
             }
 
+            _cancellationDestroy.Cancel();
+            _cancellationDestroy.Dispose();
+
             IsDestroyed = true;
         }
 
         protected virtual void OnDisable()
         {
-
+            _cancellationDisable.Cancel();
         }
 
         protected virtual void Start()
