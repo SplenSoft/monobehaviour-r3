@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -13,16 +14,11 @@ namespace SplenSoft.Unity
             Instance = GetComponent<T>();
         }
 
-        protected static async Task<T> GetInstanceAsync()
+        protected static async UniTask<T> GetInstanceAsync()
         {
             while (Instance == null)
             {
-                await Task.Yield();
-
-                if (!Application.isPlaying)
-                {
-                    throw new TaskCanceledException();
-                }
+                await UniTask.Yield(Application.exitCancellationToken);
             }
 
             return Instance;
