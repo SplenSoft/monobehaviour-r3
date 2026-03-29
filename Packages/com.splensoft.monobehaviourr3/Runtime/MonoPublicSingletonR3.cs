@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -14,11 +15,16 @@ namespace SplenSoft.Unity
             Instance = GetComponent<T>();
         }
 
-        protected static async UniTask<T> GetInstanceAsync()
+        protected static async UniTask<T> GetInstanceAsync(
+            CancellationToken? cancellationToken = null)
         {
+            CancellationToken linkedToken = cancellationToken.HasValue
+                ? CancellationTokenSource.CreateLinkedTokenSource(cancellationToken.Value, Application.exitCancellationToken).Token
+                : Application.exitCancellationToken;
+
             while (Instance == null)
             {
-                await UniTask.Yield(Application.exitCancellationToken);
+                await UniTask.Yield(linkedToken);
             }
 
             return Instance;
